@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Home Museum - Legal y Privacidad</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --text-color: #1c1c1e;
+            --accent-color: #0071e3;
+            --secondary-text: #6e6e73;
+            --border-color: #e5e5ea;
+            --card-bg: #ffffff;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #f5f5f7;
+                --accent-color: #2997ff;
+                --secondary-text: #86868b;
+                --border-color: #323236;
+                --card-bg: #1c1c1e;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0 0 80px 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(253, 253, 253, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            transition: background-color 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                background-color: rgba(18, 18, 18, 0.8);
+            }
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-text);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .lang-btn:hover:not(.active) {
+            border-color: var(--secondary-text);
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+            color: var(--text-color);
+            white-space: pre-line; /* Keeps line breaks from the json value */
+        }
+
+        /* Styling links within text to look nice */
+        .section-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .section-content a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            padding: 0 24px;
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .section-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">Home Museum</div>
+            <div class="lang-switch">
+                <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+                <button class="lang-btn" onclick="setLanguage('es')" id="btn-es">ES</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 id="main-title"></h1>
+        <p id="last-updated" style="color: var(--secondary-text); font-size: 0.875rem; margin-top: -24px; margin-bottom: 40px;"></p>
+
+        <div id="content-area">
+            <!-- Sections will be rendered here dynamically -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Pablo Caraballo Gómez</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Legal & Privacy",
+                lastUpdated: "Last updated: July 2026",
+                sections: [
+                    {
+                        title: "Copyright",
+                        body: `© 2026 Pablo Caraballo Gómez. All rights reserved.\n\nHome Museum and all original content within the app — including the app name, logo, and interface design — are the exclusive property of Pablo Caraballo Gómez and are protected by applicable intellectual property laws.\n\nThe artworks displayed in Home Museum are in the public domain and are not owned by Pablo Caraballo Gómez. Ownership of those works, if any, belongs to the respective museums or institutions that provided them under open-access programmes.\n\nUnauthorised reproduction, distribution, modification, or commercial use of this application or any of its original components is strictly prohibited without prior written permission.`
+                    },
+                    {
+                        title: "Privacy Policy",
+                        body: `Home Museum does not collect, store, or transmit any personal information. The app operates entirely without user accounts or registration.\n\nIn-App Purchases\nIn-app purchases are processed exclusively by Apple Inc. through the App Store. Pablo Caraballo Gómez does not have access to your payment details at any time. Apple's privacy policy governs how purchase data is handled and can be reviewed at: <a href="https://apple.com/legal/privacy" target="_blank">apple.com/legal/privacy</a>\n\nData Stored on Device\nThe only data stored by Home Museum is your personal preferences (selected gallery, clock style, display settings, and similar). This data is saved locally on your device and is never transmitted to any server.\n\nArtwork Delivery\nArtwork images are downloaded on demand through Apple's On-Demand Resources system, hosted on Apple's servers. This download process does not involve any personal information.\n\nAnalytics and Tracking\nHome Museum does not use third-party analytics, advertising networks, or tracking tools of any kind.\n\nChildren's Privacy\nHome Museum does not knowingly collect information from users under the age of 16. The app contains no user-generated content or social features.\n\nChanges to This Policy\nThis privacy policy may be updated from time to time. Any changes will be reflected in updated versions of the app available on the App Store. Continued use of the app after an update constitutes acceptance of the revised policy.\n\nContact\nIf you have questions about this privacy policy, please contact: <a href="mailto:pcaraballogomez@gmail.com">pcaraballogomez@gmail.com</a>`
+                    },
+                    {
+                        title: "Terms of Use",
+                        body: `By downloading or using Home Museum, you agree to be bound by these Terms of Use. If you do not agree, please do not use the app.\n\nLicence\nPablo Caraballo Gómez grants you a limited, non-exclusive, non-transferable, revocable licence to use Home Museum for personal, non-commercial purposes on Apple TV devices that you own or control, subject to these terms.\n\nIn-App Purchases\nHome Museum offers optional in-app purchases to unlock additional content (galleries). All purchases are processed by Apple and are final and non-refundable unless required by applicable law or Apple's own refund policies. You may restore previous purchases at any time using the 'Restore Purchases' option in Settings.\n\nApple End User Licence Agreement\nYour use of Home Museum is also subject to Apple's standard End User Licence Agreement (EULA), available at: <a href="https://apple.com/legal/internet-services/itunes/dev/stdeula" target="_blank">apple.com/legal/internet-services/itunes/dev/stdeula</a>\n\nProhibited Use\nYou may not: (a) reverse engineer, decompile, or disassemble the app or any part of it; (b) use the app for any unlawful purpose or in violation of any applicable regulations; (c) attempt to gain unauthorised access to any part of the app or its related infrastructure; (d) sublicence, sell, rent, or transfer your rights under this licence.\n\nDisclaimer of Warranties\nHome Museum is provided 'as is' and 'as available' without warranties of any kind, whether express or implied. Pablo Caraballo Gómez does not warrant that the app will be error-free, uninterrupted, or free of viruses or other harmful components.\n\nLimitation of Liability\nTo the fullest extent permitted by applicable law, Pablo Caraballo Gómez shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the app.\n\nChanges to These Terms\nThese Terms of Use may be revised at any time. Updates will be published in new versions of the app on the App Store. Your continued use of the app constitutes acceptance of the updated terms.\n\nGoverning Law\nThese terms shall be governed by and construed in accordance with the laws of Spain, without regard to conflict of law principles.`
+                    },
+                    {
+                        title: "Artwork",
+                        body: `All artworks displayed in Home Museum are in the public domain. They are sourced from the open-access collections of internationally recognised museums and public domain repositories, including but not limited to: the Metropolitan Museum of Art (New York), the Rijksmuseum (Amsterdam), the Art Institute of Chicago, the National Gallery of Art (Washington D.C.), and the Musée d'Orsay (Paris).\n\nWorks in the public domain are those whose intellectual property rights have expired, been forfeited, or are inapplicable under applicable law. This typically applies to works whose authors died more than 70 years ago, though the exact threshold varies by jurisdiction.\n\nHome Museum does not claim ownership over any artwork displayed in the app. All reproductions are used solely for cultural and educational display purposes.\n\nIf you believe any content displayed in Home Museum infringes upon your rights or the rights of a third party, please contact us at: <a href="mailto:pcaraballogomez@gmail.com">pcaraballogomez@gmail.com</a> and we will investigate and respond promptly.`
+                    }
+                ]
+            },
+            es: {
+                title: "Legal y Privacidad",
+                lastUpdated: "Última actualización: julio de 2026",
+                sections: [
+                    {
+                        title: "Derechos de autor",
+                        body: `© 2026 Pablo Caraballo Gómez. Todos los derechos reservados.\n\nHome Museum y todo el contenido original de la aplicación —incluidos el nombre de la app, el logotipo y el diseño de la interfaz— son propiedad exclusiva de Pablo Caraballo Gómez y están protegidos por la legislación de propiedad intelectual aplicable.\n\nLas obras de arte mostradas en Home Museum son de dominio público y no son propiedad de Pablo Caraballo Gómez. La titularidad de dichas obras, en su caso, corresponde a los museos o instituciones que las proporcionaron en el marco de programas de acceso abierto.\n\nQueda terminantemente prohibida la reproducción, distribución, modificación o uso comercial no autorizados de esta aplicación o de cualquiera de sus componentes originales sin permiso previo por escrito.`
+                    },
+                    {
+                        title: "Política de privacidad",
+                        body: `Home Museum no recopila, almacena ni transmite ningún dato personal. La aplicación funciona completamente sin cuentas de usuario ni registro.\n\nCompras integradas\nLas compras integradas son gestionadas exclusivamente por Apple Inc. a través del App Store. Pablo Caraballo Gómez no tiene acceso en ningún momento a tus datos de pago. La política de privacidad de Apple regula el tratamiento de los datos de compra y puede consultarse en: <a href="https://apple.com/es/legal/privacy" target="_blank">apple.com/es/legal/privacy</a>\n\nDatos almacenados en el dispositivo\nLos únicos datos almacenados por Home Museum son tus preferencias personales (galería seleccionada, estilo del reloj, ajustes de visualización y similares). Estos datos se guardan localmente en tu dispositivo y nunca se transmiten a ningún servidor.\n\nEntrega de las obras\nLas imágenes de las obras se descargan bajo demanda a través del sistema On-Demand Resources de Apple, alojado en los servidores de Apple. Este proceso de descarga no implica el envío de ningún dato personal.\n\nAnalítica y seguimiento\nHome Museum no utiliza herramientas de analítica de terceros, redes publicitarias ni tecnologías de seguimiento de ningún tipo.\n\nPrivacidad infantil\nHome Museum no recopila conscientemente datos de usuarios menores de 16 años. La aplicación no contiene contenido generado por usuarios ni funciones sociales.\n\nCambios en esta política\nEsta política de privacidad puede actualizarse ocasionalmente. Cualquier cambio quedará reflejado en versiones actualizadas de la app disponibles en el App Store. El uso continuado de la aplicación tras una actualización implica la aceptación de la política revisada.\n\nContacto\nSi tienes preguntas sobre esta política de privacidad, contacta con: <a href="mailto:pcaraballogomez@gmail.com">pcaraballogomez@gmail.com</a>`
+                    },
+                    {
+                        title: "Condiciones de uso",
+                        body: `Al descargar o utilizar Home Museum, aceptas quedar vinculado por estas Condiciones de Uso. Si no estás de acuerdo, por favor no utilices la aplicación.\n\nLicencia\nPablo Caraballo Gómez te otorga una licencia limitada, no exclusiva, intransferible y revocable para utilizar Home Museum con fines personales y no comerciales en los dispositivos Apple TV que poseas o controles, de acuerdo con estas condiciones.\n\nCompras integradas\nHome Museum ofrece compras integradas opcionales para desbloquear contenido adicional (galerías). Todas las compras son gestionadas por Apple y son definitivas y no reembolsables, salvo que la legislación aplicable o las políticas de reembolso de Apple dispongan lo contrario. Puedes restaurar compras anteriores en cualquier momento mediante la opción 'Restaurar compras' en Ajustes.\n\nContrato de licencia de usuario final de Apple\nEl uso de Home Museum está también sujeto al Contrato de licencia de usuario final (CLUF) estándar de Apple, disponible en: <a href="https://apple.com/legal/internet-services/itunes/dev/stdeula" target="_blank">apple.com/legal/internet-services/itunes/dev/stdeula</a>\n\nUso prohibido\nQueda prohibido: (a) aplicar ingeniería inversa, descompilar o desensamblar la aplicación o cualquier parte de ella; (b) utilizar la aplicación con fines ilegales o en vulneración de la normativa aplicable; (c) intentar obtener acceso no autorizado a cualquier parte de la aplicación o su infraestructura; (d) sublicenciar, vender, alquilar o ceder los derechos de esta licencia.\n\nExclusión de garantías\nHome Museum se proporciona 'tal cual' y 'según disponibilidad', sin garantías de ningún tipo, expresas o implícitas. Pablo Caraballo Gómez no garantiza que la aplicación esté libre de errores, sea ininterrumpida o esté exenta de virus u otros componentes dañinos.\n\nLimitación de responsabilidad\nEn la medida máxima permitida por la legislación aplicable, Pablo Caraballo Gómez no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo derivado del uso o la imposibilidad de uso de la aplicación.\n\nCambios en estas condiciones\nEstas Condiciones de Uso pueden modificarse en cualquier momento. Las actualizaciones se publicarán en nuevas versiones de la app en el App Store. El uso continuado de la aplicación implica la aceptación de las condiciones actualizadas.\n\nLegislación aplicable\nEstas condiciones se regirán e interpretarán de acuerdo con las leyes de España, sin tener en cuenta sus disposiciones sobre conflicto de leyes.`
+                    },
+                    {
+                        title: "Obras de arte",
+                        body: `Todas las obras de arte mostradas en Home Museum son de dominio público. Proceden de las colecciones de acceso abierto de museos de reconocimiento internacional y repositorios de dominio público, incluyendo, entre otros: el Museo Metropolitano de Arte (Nueva York), el Rijksmuseum (Ámsterdam), el Instituto de Arte de Chicago, la Galería Nacional de Arte (Washington D.C.) y el Musée d'Orsay (París).\n\nLas obras de dominio público son aquellas cuyos derechos de propiedad intelectual han expirado, sido cedidos o no son aplicables según la legislación vigente. Esto se aplica generalmente a obras cuyos autores fallecieron hace más de 70 años, aunque el umbral exacto varía según la jurisdicción.\n\nHome Museum no reclama la titularidad de ninguna obra de arte mostrada en la aplicación. Todas las reproducciones se utilizan exclusivamente con fines culturales y educativos.\n\nSi consideras que algún contenido mostrado en Home Museum vulnera tus derechos o los de un tercero, contacta con nosotros en: <a href="mailto:pcaraballogomez@gmail.com">pcaraballogomez@gmail.com</a> y lo investigaremos y responderemos con prontitud.`
+                    }
+                ]
+            }
+        };
+
+        function setLanguage(lang) {
+            // Update document lang
+            document.documentElement.lang = lang;
+            
+            // Toggle active buttons
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+            // Set titles
+            const langData = translations[lang];
+            document.getElementById('page-title').innerText = "Home Museum - " + langData.title;
+            document.getElementById('main-title').innerText = langData.title;
+            document.getElementById('last-updated').innerText = langData.lastUpdated;
+
+            // Render content card sections
+            const container = document.getElementById('content-area');
+            container.innerHTML = '';
+
+            langData.sections.forEach(section => {
+                const card = document.createElement('div');
+                card.className = 'section-card';
+
+                const h2 = document.createElement('h2');
+                h2.innerText = section.title;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'section-content';
+                contentDiv.innerHTML = section.body;
+
+                card.appendChild(h2);
+                card.appendChild(contentDiv);
+                container.appendChild(card);
+            });
+
+            // Save preference
+            localStorage.setItem('preferred-lang', lang);
+        }
+
+        // Initialize language
+        const savedLang = localStorage.getItem('preferred-lang');
+        const browserLang = navigator.language || navigator.userLanguage;
+        let defaultLang = 'en';
+
+        if (savedLang === 'en' || savedLang === 'es') {
+            defaultLang = savedLang;
+        } else if (browserLang.startsWith('es')) {
+            defaultLang = 'es';
+        }
+
+        setLanguage(defaultLang);
+    </script>
+</body>
+</html>
